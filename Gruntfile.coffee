@@ -1,4 +1,4 @@
-# for uRequire comments & examples see Gruntfile_CommentsExamples.coffee
+# for more uRequire comments & examples see uBerscore https://github.com/anodynos/uBerscore/blob/bb6fa0ae60105bec381eae64b8a96d1579450f22/Gruntfile_CommentsExamples.coffee
 startsWith = (string, substring) -> string.lastIndexOf(substring, 0) is 0
 S = if process.platform is 'win32' then '\\' else '/'
 nodeBin       = "node_modules#{S}.bin#{S}"
@@ -21,8 +21,11 @@ module.exports = gruntFunction = (grunt) ->
             [ '+inject:VERSION', ['urequire-example.*'], (m)-> m.beforeBody = "var VERSION='#{pkg.version}';" ]
           ]
           main: "urequire-example"
+          dependencies: exports: bundle: lodash: ['_']
 
         build:
+          verbose: true
+          clean: true
           template:
             banner: """
              /**
@@ -34,7 +37,6 @@ module.exports = gruntFunction = (grunt) ->
               */\n"""
             debugLevel: 0
 
-          clean: true
 
       UMD:
         template: 'UMDplain'
@@ -91,7 +93,7 @@ module.exports = gruntFunction = (grunt) ->
         tasks: ['urequire:UMD' , 'urequire:spec', 'test' ] #'mocha:UMD']
       min:
         files: ["#{sourceDir}/**/*", "#{sourceSpecDir}/**/*"]
-        tasks: ['urequire:min', 'urequire:specCombined', 'concat:specCombinedFakeModuleMin', 'mochaCmdDev', 'run']
+        tasks: ['urequire:min', 'urequire:specCombined', 'concat:specCombinedFakeModuleMin', 'mochaCmdDev', 'mocha:plainScript']
 
     shell:
       mochaCmd: command: "#{nodeBin}mocha #{buildSpecDir}/index --recursive --reporter spec"
@@ -120,12 +122,12 @@ module.exports = gruntFunction = (grunt) ->
       grunt.registerTask cmd, splitTasks "#{task}:#{cmd}"
 
   grunt.registerTask shortCut, splitTasks tasks for shortCut, tasks of {
-  default:   "clean build test min testMin run"
-  release:   "clean build test min testMin mocha run"
-  build:     "urequire:UMD"
+    default:   "clean build test min testMin run"
+    release:   "clean build test min testMin mocha run"
+    build:     "urequire:UMD"
 
-  test:      "urequire:spec mochaCmd"
-  testMin:   "urequire:specCombined concat:specCombinedFakeModuleMin mochaCmdDev"
+    test:      "urequire:spec mochaCmd"
+    testMin:   "urequire:specCombined concat:specCombinedFakeModuleMin mochaCmdDev"
   }
 
   grunt.loadNpmTasks task for task of pkg.devDependencies when startsWith(task, 'grunt-')

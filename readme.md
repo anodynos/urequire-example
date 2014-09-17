@@ -1,28 +1,46 @@
-# uBerscore v0.0.15
+# urequire-example v0.0.1
 
-[![Build Status](https://travis-ci.org/anodynos/uBerscore.png)](https://travis-ci.org/anodynos/uBerscore)
-[![Up to date Status](https://david-dm.org/anodynos/uBerscore.png)](https://david-dm.org/anodynos/uBerscore.png)
+[![Build Status](https://travis-ci.org/anodynos/urequire-example.png)](https://travis-ci.org/anodynos/urequire-example)
+[![Up to date Status](https://david-dm.org/anodynos/urequire-example.png)](https://david-dm.org/anodynos/urequire-example.png)
 
-An anorthodox, extensible, overloaded, highly experimental facade of *underscore* facilities & leftovers.
+A simple example project using [urequire](http://urequire.org) & [grunt-urequire](https://github.com/aearly/grunt-urequire).
 
-uBerscore.js is an early experiment: a 'higher' level data manipulator for all kinds of js collections (objects+arrays); it offers functionality that underscore doesn't and wouldn't have, and its highly build on the great `_`.
+Provides boilerplate & grunt/urequire config for cross module systems development and cross runtimes deployment.
 
-There will be no documentation before 0.1 and consider it likely to change...
+It comes with tests that run on nodejs, phantomjs and browser (Web/AMD & Web/Script).
 
-But do see:
+## Usage:
 
-* [`Gruntfile.coffee`](https://github.com/anodynos/uBerscore/blob/master/Gruntfile.coffee) written with the wicked [uRequire](https://github.com/anodynos/uRequire) configuration, that builds uBerscore's modules in a number of ways, with the most DRY config ever.
+### Download and install
 
-Note: [uBerscore-dev.js](https://github.com/anodynos/uBerscore/blob/master/build/dist/uberscore-dev.js) and its minified brother are running on the WEB (both with AMD and as plain `<script/>`) and in nodejs through the single-file 'combined' conversion [uRequire](https://github.com/anodynos/uRequire) with no other dependencies (but 'lodash').
+```bash
+... $ git clone anodynos/urequire-example
 
-* [`blending/Blender`](https://github.com/anodynos/uBerscore/blob/master/source/code/blending/Blender.coffee) that powers [uRequire](https://github.com/anodynos/uRequire)'s versatile [configuration deriving](http://urequire.org/masterdefaultsconfig.coffee#deriving) to get some ideas.
+... $ cd urequire-example
 
-* The wicked [`isEquals/isIquals/isExact/isLike`](https://github.com/anodynos/uBerscore/blob/master/source/code/objects/isEqual.coffee), that adds options to `_.isEqual`
+../urequire-example $ npm install
+
+../urequire-example $ bower install
+```
+
+### A full clean build & test.
+
+```bash
+../urequire-example $ grunt release
+```
+
+### Watch file changes (code & specs), rebuilding *only* what is changed & running tests each time.
+
+```bash
+../urequire-example $ grunt watch:dev
+```
+
 
 # License
+
 The MIT License
 
-Copyright (c) 2012 Agelos Pikoulas (agelos.pikoulas@gmail.com)
+Copyright (c) 2014 Agelos Pikoulas (agelos.pikoulas@gmail.com)
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

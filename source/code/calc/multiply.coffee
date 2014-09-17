@@ -4,4 +4,4 @@ define ['calc/add'], (add) ->
     for times in [1..byNum]
       result = add result, num
 
-    result
+    result #return

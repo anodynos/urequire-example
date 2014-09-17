@@ -2,16 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>example: mylib: 'UMDplain', loader: 'AMD/RequireJS' }</title>
+    <title>urequire-example: 'UMDplain', loader: 'AMD/RequireJS' }</title>
   </head>
 
   <body>
-    <h1>mylib specs, { template: 'UMDplain', loader: 'AMD/RequireJS' }</h1>
+    <h1>urequire-example specs, { template: 'UMDplain', loader: 'AMD/RequireJS' }</h1>
 
     <strong> ** uRequire note: **</strong>
     <ul>
       <li>Dependencies (eg. `lodash`) are loaded through RequireJs loader (using `rjs.paths`)
-      <li>'mylib' dependency is loading through `rjs.baseUrl`, which in turn loads all bundle dependencies *as seperate files*).
+      <li>'urequire-example' dependency is loading through `rjs.baseUrl`, which in turn loads all bundle dependencies *as seperate files*).
     </ul>
     <p/>Check console's output
   </body>
@@ -26,59 +26,42 @@
       // all libraries are now relative to the bundle/baseUrl
       paths: {
         lodash: "../../bower_components/lodash/dist/lodash.min",
-        underscore: "../.././bower_components/lodash/dist/lodash.min", // doesnt work without ther /./ hack !'
         //lodash: "../../bower_components/underscore/underscore-min", // drop in 'alternative' of lodash :-)
         // ** uRequire note: **
-        // if the following 'rjs.paths.mylib' exists,
+        // if the following 'rjs.paths.urequire-example' exists,
         //  it mandates we are loading the OPTIMIZED version,
         // else
-        //  we load 'mylib' dependency (and its contained deps) through `rjs.baseUrl`.
+        //  we load 'urequire-example' dependency (and its contained deps) through `rjs.baseUrl`.
         // this is the only change needed!
-        //,mylib : "../../build/mylib"
+        //,'urequire-example' : "../../build/urequire-example"
       },
 
       shim: {
         lodash: { deps: [], exports: "_"} // needed only when 'lodash' is 'underscore'
-        underscore: { deps: [], exports: "_"}, // needed only when 'lodash' is 'underscore'
       }
     });
 
-    // lets create two globals, that will be hijacked by mylib when loaded
-    mylib = 'Old global `mylib`';
-    mylib = 'Old global `mylib`';
+    // lets create two globals, that will be hijacked by urequire-example when loaded
+    window.urequireExample = 'Old global `urequireExample`';
+    window.uEx = 'Old global `uEx`';
 
-    console.log("LOADING mylib via requireJs....");
-    require(['mylib'], function(ub){
-      console.log("...LOADED mylib via requireJs!");
-      var o = {a: 5, c: 3, b: -2},
-        consoleKV = function(v,k){console.log(k, ':', v)};
+    console.log("LOADING 'urequire-example' via requireJs....");
+    require(['urequire-example'], function(uEx_local){
+      console.log("...LOADED urequire-example via requireJs!");
 
-      console.log("ub local dependency variable");
-      ub.go(o, {iter: consoleKV});
+      console.log("uEx_local local var", uEx_local.person);
+      console.log("uEx global var", uEx.person);
+      console.log("urequireExample global var", urequireExample.person);
 
-      // globals mylib & mylib
-      console.log("mylib global");
-      mylib.go(o, {iter: consoleKV});
+      console.log("Checking noConflict(), reclaim globals `urequireExample` & `uEx`.");
+      console.log("Current uEx:", uEx);
+      console.log("Current urequireExample:", urequireExample);
 
-      console.log("mylib global, sorted by value");
-      mylib.go(o, {iter: consoleKV, sort: function(v){return v} });
-
-      console.log("mylib global, sorted by key");
-      mylib.go(o, {iter: consoleKV, sort: function(v, k){return k} });
-
-      console.log(mylib.okv({}, 'weird &$%$% keys*&&Q', 'are cool! '));
-
-      console.log("Checking noConflict(), reclaim globals mylib & mylib.");
-      console.log("Current values:");
-      console.log(mylib);
-      console.log(mylib);
-      var localmylib = mylib.noConflict();
+      var localmylib = uEx.noConflict();
       console.log("noConflict() was called - new values:");
-      console.log("Old global `mylib` is '" + mylib + "'");
-      console.log("Old global `mylib` is '" + mylib + "'");
-
-      console.log("localmylib still works, sorted by key");
-      localmylib.go(o, {iter: consoleKV, sort: function(v, k){return k} });
+      console.log("Old global `uEx` is '", uEx);
+      console.log("Old global `urequireExample` is '", urequireExample);
+      console.log("localmylib still works", localmylib.person);
     });
   </script>
 </html>

@@ -1,4 +1,4 @@
-
+# specHelpers-imports injected by uRequire:spec task
 define ->
   describe """
     uRequire's `rootExports` & `noConflict():`
@@ -8,18 +8,24 @@ define ->
       uExLocal = require 'urequire-example'
 
       it "registers globals 'urequireExample' & 'uEx'", ->
-        expect( window.urequireExample ).to.equal uExLocal
-        expect( window.uEx ).to.equal uExLocal
+        equal window.urequireExample, uExLocal
+        equal window.uEx, uExLocal
 
       # `window.urequireExample` & `window.uEx` must be set on browser
       # BEFORE loading 'urequire-example' (in SpecRunner_XXX.html)
       it "noConflict() returns module & sets old values to globals 'urequireExample', 'uEx'", ->
-        expect( window.uEx.noConflict() ).to.equal uExLocal
+        equal window.uEx.noConflict(), uExLocal
 
         if __isWeb # work only on browser
-          expect( window.urequireExample ).to.equal "Old global `urequireExample`"
-          expect( window.uEx ).to.equal "Old global `uEx`"
+          equal window.urequireExample, "Old global `urequireExample`"
+          equal window.uEx, "Old global `uEx`"
 
-      it " 'urequire-example' has teh right properties", ->
-        equal uExLocal.person.age, 40
-        tru _.isFunction uExLocal.add
+      describe " 'urequire-example' has the right properties:", ->
+        it "person.age", ->
+          equal uExLocal.person.age, 40
+
+        it "add", ->
+          tru _.isFunction uExLocal.add
+
+        it "VERSION", ->
+          fals _.isUndefined uExLocal.VERSION

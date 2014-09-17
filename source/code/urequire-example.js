@@ -1,7 +1,7 @@
 ({ urequire: {  // uRequire Module Configuration
      rootExports: ['urequireExample', 'uEx'],
      noConflict: true
-}})
+}});
 
 define(['./models/person'], function (person) {
 

@@ -2,15 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>example: mylib : 'combined', loader: '&ltscript/&gt' }</title>
+    <title>urequire-example : 'combined', loader: '&ltscript/&gt' }</title>
   </head>
 
   <body>
-    <h1>example: mylib : 'combined', loader: '&ltscript/&gt' }</h1>
+    <h1>urequire-example : 'combined', loader: '&ltscript/&gt' }</h1>
 
     <strong> ** uRequire note: **</strong>
     <ul>
-      <li>mylib-dev.js is loaded as a simple &ltscript/&gt, WITHOUT any trace of RequireJs loader or configuration!
+      <li>urequire-example-min.js is loaded as a simple &ltscript/&gt, WITHOUT any trace of RequireJs loader or configuration!
       <li>Dependencies (eg. `lodash` or `underscore`) must be &ltscript/&gt loaded BEFORE it, exposing the global '_',
           which is then acquired by `uRequire`'s special build with `combined` template.
     </ul>
@@ -24,40 +24,28 @@
   <script>
     // lets create two globals, that will be 'hijacked' by mylib when its loaded.
     // Then we can test `noConflict()`
-    window.mylib = "Old global `mylib`" ;
-    window.mylib = "Old global `mylib`";
+    window.uEx = "Old global `uEx`" ;
+    window.urequireExample = "Old global `urequireExample`";
   </script>
 
   <!-- Loading as plain JS: it rootExports `mylib` & `mylib` as window/global vars -->
-  <script src="../../build/mylib.js"></script>
+  <script src="../../build/urequire-example-min.js"></script>
 
   <!--Now lets run some examples/tests!-->
   <script>
-    var o = {a: 5, c: 3, b: -2},
-      consoleKV = function(v,k){console.log(k, ':', v)};
+    console.log("...LOADED urequire-example via script tag!", uEx);
 
-    // globals mylib & mylib
-    console.log("mylib global");
-    mylib.go(o, {iter: consoleKV});
+    console.log("uEx global var", uEx.person);
+    console.log("urequireExample global var", urequireExample.person);
 
-    console.log("mylib global, sorted by value");
-    mylib.go(o, {iter: consoleKV, sort: function(v){return v} });
+    console.log("Checking noConflict(), reclaim globals `urequireExample` & `uEx`.");
+    console.log("Current uEx:", uEx);
+    console.log("Current urequireExample:", urequireExample);
 
-    console.log("mylib global, sorted by key");
-    mylib.go(o, {iter: consoleKV, sort: function(v, k){return k} });
-
-    console.log(mylib.okv({}, 'weird &$%$% keys*&&Q', 'are cool! '));
-
-    console.log("Checking noConflict(), reclaim globals mylib & mylib.");
-    console.log("Current values:");
-    console.log(mylib);
-    console.log(mylib);
-    var localmylib = mylib.noConflict();
+    var localmylib = uEx.noConflict();
     console.log("noConflict() was called - new values:");
-    console.log("Old global `mylib` is '" + mylib + "'");
-    console.log("Old global `mylib` is '" + mylib + "'");
-
-    console.log("localmylib still works, sorted by key");
-    localmylib.go(o, {iter: consoleKV, sort: function(v, k){return k} });
+    console.log("Old global `uEx` is '", uEx);
+    console.log("Old global `urequireExample` is '", urequireExample);
+    console.log("localmylib still works", localmylib.person);
   </script>
 </html>
