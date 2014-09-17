@@ -35,6 +35,14 @@ It comes with tests that run on nodejs, phantomjs and browser (Web/AMD & Web/Scr
 ../urequire-example $ grunt watch:dev
 ```
 
+### I want more
+
+For more uRequire config examples with comments etc see :
+
+* uBerscore's [full grunt config](https://github.com/anodynos/uBerscore/blob/bb6fa0ae60105bec381eae64b8a96d1579450f22/Gruntfile_CommentsExamples.coffee) or its latest version.
+
+* uRequire's [config docs](https://github.com/anodynos/uRequire/blob/master/source/code/config/MasterDefaultsConfig.coffee.md)
+
 
 # License
 
