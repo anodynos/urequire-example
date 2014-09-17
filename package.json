@@ -1,0 +1,53 @@
+{
+  "name": "urequire-example",
+  "description": "Example project build with uRequire.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/anodynos/urequire-example",
+  "author": {
+    "name": "Agelos Pikoulas",
+    "email": "agelos.pikoulas@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "keywords": [
+    "urequire",
+    "examples"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anodynos/urequire-example"
+  },
+  "bugs": {
+    "url": "git://github.com/anodynos/urequire-example/issues",
+    "email": "agelos.pikoulas@gmail.com"
+  },
+  "main": "./build/urequire-example.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "engines": {
+    "node": ">=0.8"
+  },
+  "dependencies": {
+    "lodash": "*"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*",
+    "coffee-script": "*",
+    "grunt": "0.4.x",
+    "grunt-urequire": "0.6.x",
+    "grunt-contrib-clean": "0.4.x",
+    "grunt-contrib-concat": "0.1.x",
+    "grunt-shell": "~0.3.x",
+    "grunt-contrib-watch": "0.5.x",
+    "grunt-mocha": "*",
+    "uberscore": "0.0.16",
+    "urequire": "0.6.x"
+
+  }
+}

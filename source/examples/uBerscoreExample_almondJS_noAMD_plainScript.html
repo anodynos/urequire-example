@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>example: mylib : 'combined', loader: '&ltscript/&gt' }</title>
+  </head>
+
+  <body>
+    <h1>example: mylib : 'combined', loader: '&ltscript/&gt' }</h1>
+
+    <strong> ** uRequire note: **</strong>
+    <ul>
+      <li>mylib-dev.js is loaded as a simple &ltscript/&gt, WITHOUT any trace of RequireJs loader or configuration!
+      <li>Dependencies (eg. `lodash` or `underscore`) must be &ltscript/&gt loaded BEFORE it, exposing the global '_',
+          which is then acquired by `uRequire`'s special build with `combined` template.
+    </ul>
+    <p/>Check console's output
+  </body>
+
+  <!--We load our 'dependencies' first, exposing globals (eg '_')-->
+  <script src="../../bower_components/lodash/dist/lodash.min.js"></script>
+  <!--<script src="../../bower_components/underscore/underscore-min.js"></script>-->
+
+  <script>
+    // lets create two globals, that will be 'hijacked' by mylib when its loaded.
+    // Then we can test `noConflict()`
+    window.mylib = "Old global `mylib`" ;
+    window.mylib = "Old global `mylib`";
+  </script>
+
+  <!-- Loading as plain JS: it rootExports `mylib` & `mylib` as window/global vars -->
+  <script src="../../build/mylib.js"></script>
+
+  <!--Now lets run some examples/tests!-->
+  <script>
+    var o = {a: 5, c: 3, b: -2},
+      consoleKV = function(v,k){console.log(k, ':', v)};
+
+    // globals mylib & mylib
+    console.log("mylib global");
+    mylib.go(o, {iter: consoleKV});
+
+    console.log("mylib global, sorted by value");
+    mylib.go(o, {iter: consoleKV, sort: function(v){return v} });
+
+    console.log("mylib global, sorted by key");
+    mylib.go(o, {iter: consoleKV, sort: function(v, k){return k} });
+
+    console.log(mylib.okv({}, 'weird &$%$% keys*&&Q', 'are cool! '));
+
+    console.log("Checking noConflict(), reclaim globals mylib & mylib.");
+    console.log("Current values:");
+    console.log(mylib);
+    console.log(mylib);
+    var localmylib = mylib.noConflict();
+    console.log("noConflict() was called - new values:");
+    console.log("Old global `mylib` is '" + mylib + "'");
+    console.log("Old global `mylib` is '" + mylib + "'");
+
+    console.log("localmylib still works, sorted by key");
+    localmylib.go(o, {iter: consoleKV, sort: function(v, k){return k} });
+  </script>
+</html>

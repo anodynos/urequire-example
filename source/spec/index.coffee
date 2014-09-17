@@ -1,0 +1,1 @@
+require 'urequire-example-spec'
