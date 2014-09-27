@@ -18,7 +18,8 @@ module.exports = gruntFunction = (grunt) ->
         bundle:
           path: "#{sourceDir}"
           resources: [
-            [ '+inject:VERSION', ['urequire-example.*'], (m)-> m.beforeBody = "var VERSION='#{pkg.version}';" ]
+            # 'injectVERSION' # use with urequire 0.7.0, with 'node_modules/urequire-rc-injectVERSION'
+            [ '~+inject:VERSION', ['urequire-example.*'], (m)-> m.beforeBody = "var VERSION='#{pkg.version}';" ] #urequire 0.6.x
           ]
           main: "urequire-example"
           dependencies: exports: bundle: lodash: ['_']
@@ -35,8 +36,6 @@ module.exports = gruntFunction = (grunt) ->
               * Copyright(c) #{ grunt.template.today("yyyy") } #{ pkg.author.name } (#{ pkg.author.email } )
               * Licensed #{ pkg.licenses[0].type } #{ pkg.licenses[0].url }
               */\n"""
-            debugLevel: 0
-
 
       UMD:
         template: 'UMDplain'

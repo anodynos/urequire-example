@@ -16,12 +16,11 @@ for buildPath in [
         l = new _B.Logger "Example '#{buildPath}'"
         l.log 'Global urequireExample is', urequireExample
         l.log 'Global urequireExample == uEx', uEx is urequireExample
-        l.log 'local uEx_local is', uEx_local
         l.log 'Global === local', uEx_local is urequireExample
 
         l.ok "Successfully loaded mylib v#{uEx_local.VERSION} from: '#{buildPath}'"
         if uEx_local.person.age is 40
-          l.ok "Person as is correctly 40"
+          l.ok "Person age is correctly 40"
         else
           l.err "Person age is incorrectly #{uEx_local.person.age}"
       catch err

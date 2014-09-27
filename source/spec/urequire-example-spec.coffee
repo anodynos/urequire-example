@@ -20,12 +20,25 @@ define ->
           equal window.urequireExample, "Old global `urequireExample`"
           equal window.uEx, "Old global `uEx`"
 
-      describe " 'urequire-example' has the right properties:", ->
+      describe " 'urequire-example' has:", ->
+
+        it "person.fullName()", ->
+          equal uExLocal.person.fullName(), 'John Doe'
+
         it "person.age", ->
           equal uExLocal.person.age, 40
 
-        it "add", ->
+        it "add function", ->
           tru _.isFunction uExLocal.add
+          equal uExLocal.add(20, 18), 38
+          equal uExLocal.calc.add(20, 8), 28
 
-        it "VERSION", ->
-          fals _.isUndefined uExLocal.VERSION
+        it "calc.multiply", ->
+          tru _.isFunction uExLocal.calc.multiply
+          equal uExLocal.calc.multiply(18, 2), 36
+
+        it "person.eat food", ->
+          equal uExLocal.person.eat('food'), 'ate food'
+
+        it "has VERSION", ->
+          fals _.isEmpty uExLocal.VERSION
