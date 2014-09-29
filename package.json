@@ -47,7 +47,6 @@
     "grunt-contrib-watch": "0.5.x",
     "grunt-mocha": "*",
     "uberscore": "0.0.16",
-    "urequire": "0.7.x"
-
+    "urequire": ">=0.6.20"
   }
 }
