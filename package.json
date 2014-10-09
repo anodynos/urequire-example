@@ -30,7 +30,7 @@
     "test": "grunt release"
   },
   "engines": {
-    "node": ">=0.8"
+    "node": ">=0.10"
   },
   "dependencies": {
     "lodash": "*"
@@ -50,6 +50,5 @@
     "urequire": "0.7.x",
     "urequire-rc-inject-version": "*",
     "urequire-rc-less": "*"
-
   }
 }
