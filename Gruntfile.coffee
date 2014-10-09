@@ -18,14 +18,20 @@ module.exports = gruntFunction = (grunt) ->
         bundle:
           path: "#{sourceDir}"
           resources: [
-            # 'injectVERSION' # use with urequire 0.7.0, with 'node_modules/urequire-rc-injectVERSION'
-            [ '~+inject:VERSION', ['urequire-example.*'], (m)-> m.beforeBody = "var VERSION='#{pkg.version}';" ] #urequire 0.6.x
+            'inject-version' # use with urequire 0.7.0, with 'node_modules/urequire-rc-inject-version'
+
+            ['less', {
+              $srcMain: 'style/myMainStyle.less'
+              compress: true
+            }]
+
           ]
           main: "urequire-example"
           dependencies: exports: bundle: lodash: ['_']
 
         build:
           verbose: true
+          debugLevel: 100
           clean: true
           template:
             banner: """
@@ -49,8 +55,8 @@ module.exports = gruntFunction = (grunt) ->
         template:
           name: 'combined'
           moduleName: 'urequire-example'
-        dstPath: "#{buildDir}/urequire-example-min.js"
-        optimize: 'uglify2'
+        dstPath: "#{buildDir}/minified/urequire-example-min.js"
+        optimize: true # true equals 'uglify2'
         rjs: preserveLicenseComments: false
 
       spec:
@@ -109,7 +115,7 @@ module.exports = gruntFunction = (grunt) ->
 
     concat:
       specCombinedFakeModuleMin:
-        options: banner: '{"name":"urequire-example", "main":"../../../urequire-example-min.js"}'
+        options: banner: '{"name":"urequire-example", "main":"../../../minified/urequire-example-min.js"}'
         src:[]
         dest: "#{buildSpecDir}_combined/node_modules/urequire-example/package.json"
 

@@ -1,7 +1,7 @@
 {
   "name": "urequire-example",
   "description": "Example project build with uRequire.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/anodynos/urequire-example",
   "author": {
     "name": "Agelos Pikoulas",
@@ -47,6 +47,9 @@
     "grunt-contrib-watch": "0.5.x",
     "grunt-mocha": "*",
     "uberscore": "0.0.16",
-    "urequire": ">=0.6.20"
+    "urequire": "0.7.x",
+    "urequire-rc-inject-version": "*",
+    "urequire-rc-less": "*"
+
   }
 }
