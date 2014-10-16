@@ -18,20 +18,16 @@ module.exports = gruntFunction = (grunt) ->
         bundle:
           path: "#{sourceDir}"
           resources: [
-            'inject-version' # use with urequire 0.7.0, with 'node_modules/urequire-rc-inject-version'
-
-            ['less', {
-              $srcMain: 'style/myMainStyle.less'
-              compress: true
-            }]
-
+            'inject-version'
+            ['less', {$srcMain: 'style/myMainStyle.less', compress: true}]
+            'teacup-js'
           ]
           main: "urequire-example"
           dependencies: exports: bundle: lodash: ['_']
 
         build:
-          verbose: true
-          debugLevel: 100
+          verbose: false
+#          debugLevel: 100
           clean: true
           template:
             banner: """
@@ -51,6 +47,8 @@ module.exports = gruntFunction = (grunt) ->
           compress: false
           mangle: false
 
+        resources: [ ['teacup-js2html', {deleteJs: true, args: ['World!'] }] ] # works only with nodejs/UMD templates
+
       min:
         template:
           name: 'combined'
@@ -60,29 +58,26 @@ module.exports = gruntFunction = (grunt) ->
         rjs: preserveLicenseComments: false
 
       spec:
+#        debugLevel: 100
         derive: []
         path: "#{sourceSpecDir}"
         copy: [/./]
         dstPath: "#{buildSpecDir}"
-        commonCode: "var expect = chai.expect; // injected @ `spec: bundle: commonCode`."
 
         dependencies: exports: bundle:
           chai: 'chai'
           lodash: ['_']
           'uberscore': '_B'
           'urequire-example': ['uEx']
-          specHelpers: 'specHelpers'
+          'helpers/specHelpers': 'spH'
 
         resources: [
-          [ '+injectSpecCommons', ['**/*.js']
-            (m)->
-              m.beforeBody = "var l = new _B.Logger('#{m.dstFilename}');"
-              if (m.dstFilename isnt 'specHelpers.js')
-                m.mergedCode =
-                  if shi = (_.find m.bundle.modules, (mod)-> mod.path is 'specHelpers-imports')
-                    shi.factoryBody
-                  else
-                    throw new Error "specHelpers-imports not found"
+          [ '+inject-_B.logger', ['**/*.js'], (m)-> m.beforeBody = "var l = new _B.Logger('#{m.dstFilename}');"]
+
+          ['import',
+              'helpers/specHelpers': [ 'tru', ['equal', 'eq'], 'fals' ]
+              'lodash': [ 'isFunction' ]  # just for test
+              'chai': ['expect']
           ]
         ]
 
@@ -95,7 +90,7 @@ module.exports = gruntFunction = (grunt) ->
       options: spawn: false
       UMD:
         files: ["#{sourceDir}/**/*", "#{sourceSpecDir}/**/*"]
-        tasks: ['urequire:UMD' , 'urequire:spec', 'test' ] #'mocha:UMD']
+        tasks: ['urequire:UMD' , 'urequire:spec', 'mochaCmd'] #'mocha:UMD']
       min:
         files: ["#{sourceDir}/**/*", "#{sourceSpecDir}/**/*"]
         tasks: ['urequire:min', 'urequire:specCombined', 'concat:specCombinedFakeModuleMin', 'mochaCmdDev', 'mocha:plainScript']
@@ -127,8 +122,7 @@ module.exports = gruntFunction = (grunt) ->
       grunt.registerTask cmd, splitTasks "#{task}:#{cmd}"
 
   grunt.registerTask shortCut, splitTasks tasks for shortCut, tasks of {
-    default:   "clean build test min testMin run"
-    release:   "clean build test min testMin mocha run"
+    default:   "clean build test min testMin mocha run"
     build:     "urequire:UMD"
 
     test:      "urequire:spec mochaCmd"

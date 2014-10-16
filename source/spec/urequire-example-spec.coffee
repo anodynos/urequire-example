@@ -1,45 +1,28 @@
-# All imports can be automatically injected via uRequire:
-# See specHelpers-imports injected by uRequire:spec task
+# All imports can be automatically injected via urequire-rc-import
+# See 'specHelpers' imports injected by uRequire:spec task
 
 uExLocal = require 'urequire-example'
 
-describe """
-  uRequire's `rootExports` & `noConflict():` # (running on #{
-    if __isNode then 'nodejs' else 'Web'} via #{if __isAMD then 'AMD' else 'noAMD/script'}):
-  """, ->
-    console.log "Inside urequire-example specs 'describe'"
-    it "registers globals 'urequireExample' & 'uEx'", ->
-      equal window.urequireExample, uExLocal
-      equal window.uEx, uExLocal
+describe " 'urequire-example' has:", ->
 
-    # `window.urequireExample` & `window.uEx` must be set on browser
-    # BEFORE loading 'urequire-example' (in SpecRunner_XXX.html)
-    it "noConflict() returns module & sets old values to globals 'urequireExample', 'uEx'", ->
-      equal window.uEx.noConflict(), uExLocal
+  it "person.fullName()", ->
+    eq uExLocal.person.fullName(), 'John Doe'
 
-      if (__isWeb? and __isWeb) # work only on browser
-        equal window.urequireExample, "Old global `urequireExample`"
-        equal window.uEx, "Old global `uEx`"
+  it "person.age", ->
+    eq uExLocal.person.age, 40
 
-    describe " 'urequire-example' has:", ->
+  it "add function", ->
+    tru _.isFunction uExLocal.add
+    eq uExLocal.add(20, 18), 38
+    eq uExLocal.calc.add(20, 8), 28
 
-      it "person.fullName()", ->
-        equal uExLocal.person.fullName(), 'John Doe'
+  it "calc.multiply", ->
+    tru _.isFunction uExLocal.calc.multiply
+    eq uExLocal.calc.multiply(18, 2), 36
 
-      it "person.age", ->
-        equal uExLocal.person.age, 40
+  it "person.eat food", ->
+    eq uExLocal.person.eat('food'), 'ate food'
 
-      it "add function", ->
-        tru _.isFunction uExLocal.add
-        equal uExLocal.add(20, 18), 38
-        equal uExLocal.calc.add(20, 8), 28
+  it "has VERSION", ->
+    fals _.isEmpty uExLocal.VERSION
 
-      it "calc.multiply", ->
-        tru _.isFunction uExLocal.calc.multiply
-        equal uExLocal.calc.multiply(18, 2), 36
-
-      it "person.eat food", ->
-        equal uExLocal.person.eat('food'), 'ate food'
-
-      it "has VERSION", ->
-        fals _.isEmpty uExLocal.VERSION

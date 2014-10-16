@@ -1,7 +1,7 @@
 {
   "name": "urequire-example",
   "description": "Example project build with uRequire.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "homepage": "https://github.com/anodynos/urequire-example",
   "author": {
     "name": "Agelos Pikoulas",
@@ -33,22 +33,25 @@
     "node": ">=0.10"
   },
   "dependencies": {
-    "lodash": "*"
+    "lodash": "*",
+    "replace-ext": "0.0.1"
   },
   "devDependencies": {
     "chai": "*",
     "mocha": "*",
     "coffee-script": "*",
     "grunt": "0.4.x",
-    "grunt-urequire": "0.6.x",
+    "grunt-urequire": "*",
     "grunt-contrib-clean": "0.4.x",
     "grunt-contrib-concat": "0.1.x",
     "grunt-shell": "~0.3.x",
     "grunt-contrib-watch": "0.5.x",
     "grunt-mocha": "*",
     "uberscore": "0.0.16",
-    "urequire": "0.7.x",
-    "urequire-rc-inject-version": "*",
-    "urequire-rc-less": "*"
+    "urequire": "0.7.0-beta4",
+    "urequire-rc-inject-version": "0.1.x",
+    "urequire-rc-less": "0.1.x",
+    "urequire-rc-teacup-js": "0.1.x",
+    "urequire-rc-teacup-js2html": "0.1.x"
   }
 }
