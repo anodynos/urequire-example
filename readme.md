@@ -1,4 +1,4 @@
-# urequire-example v0.0.1
+# urequire-example
 
 [![Build Status](https://travis-ci.org/anodynos/urequire-example.png)](https://travis-ci.org/anodynos/urequire-example)
 [![Up to date Status](https://david-dm.org/anodynos/urequire-example.png)](https://david-dm.org/anodynos/urequire-example.png)

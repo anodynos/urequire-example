@@ -27,7 +27,7 @@
   },
   "main": "./build/urequire-example.js",
   "scripts": {
-    "test": "grunt release"
+    "test": "grunt"
   },
   "engines": {
     "node": ">=0.10"
