@@ -33,8 +33,7 @@
     "node": ">=0.10"
   },
   "dependencies": {
-    "lodash": "*",
-    "replace-ext": "0.0.1"
+    "lodash": "*"
   },
   "devDependencies": {
     "chai": "*",
@@ -51,6 +50,7 @@
     "uberscore": "0.0.16",
     "urequire": "0.7.0-beta4",
     "urequire-rc-inject-version": "0.1.x",
+    "urequire-rc-import": "0.1.x",
     "urequire-rc-less": "0.1.x",
     "urequire-rc-teacup-js": "0.1.x",
     "urequire-rc-teacup-js2html": "0.1.x"
