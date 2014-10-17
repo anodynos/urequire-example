@@ -40,6 +40,7 @@
     "chai": "*",
     "mocha": "*",
     "coffee-script": "*",
+    "teacup": "*",
     "grunt": "0.4.x",
     "grunt-urequire": "*",
     "grunt-contrib-clean": "0.4.x",
