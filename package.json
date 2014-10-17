@@ -1,7 +1,7 @@
 {
   "name": "urequire-example",
   "description": "Example project build with uRequire.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "https://github.com/anodynos/urequire-example",
   "author": {
     "name": "Agelos Pikoulas",
@@ -52,7 +52,7 @@
     "urequire-rc-inject-version": "0.1.x",
     "urequire-rc-import": "0.1.x",
     "urequire-rc-less": "0.1.x",
-    "urequire-rc-teacup-js": "0.1.x",
-    "urequire-rc-teacup-js2html": "0.1.x"
+    "urequire-rc-teacup-js": "0.2.x",
+    "urequire-rc-teacup-js2html": "0.2.x"
   }
 }

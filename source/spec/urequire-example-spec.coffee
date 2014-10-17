@@ -23,6 +23,8 @@ describe " 'urequire-example' has:", ->
   it "person.eat food", ->
     eq uExLocal.person.eat('food'), 'ate food'
 
-  it "has VERSION", ->
+  it "has some VERSION", ->
     fals _.isEmpty uExLocal.VERSION
 
+  it "has the correct homeHTML", ->
+    eq uExLocal.homeHTML, '<html><body><div id="Hello,">Universe!</div><ul><li>Leonardo</li><li>Da Vinci</li></ul></body></html>'

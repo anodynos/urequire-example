@@ -20,10 +20,11 @@ module.exports = gruntFunction = (grunt) ->
           resources: [
             'inject-version'
             ['less', {$srcMain: 'style/myMainStyle.less', compress: true}]
-            'teacup-js'
+            ['teacup-js', tags: 'html, doctype, body, div, ul, li']
           ]
           main: "urequire-example"
-          dependencies: exports: bundle: lodash: ['_']
+          dependencies: exports: bundle:
+            lodash: ['_']
 
         build:
           verbose: false
@@ -47,14 +48,23 @@ module.exports = gruntFunction = (grunt) ->
           compress: false
           mangle: false
 
-        resources: [ ['teacup-js2html', {deleteJs: true, args: ['World!'] }] ] # works only with nodejs/UMD templates
+        resources: [
+          ['teacup-js2html', # works only with nodejs/UMD templates
+#              deleteJs: true,
+              args: #['World!']
+                'markup/**/home': ['World!']
+                allButHome:
+                  isFileIn: ['**/*', '!', (f)-> f is 'markup/home']
+                  args: [ ['Michael', 'Angelo' ] ]
+          ]
+        ]
 
       min:
         template:
           name: 'combined'
           moduleName: 'urequire-example'
         dstPath: "#{buildDir}/minified/urequire-example-min.js"
-        optimize: true # true equals 'uglify2'
+#        optimize: true # true equals 'uglify2'
         rjs: preserveLicenseComments: false
 
       spec:
@@ -105,7 +115,6 @@ module.exports = gruntFunction = (grunt) ->
       plainScript:
         src: ["#{buildSpecDir}/SpecRunner_almondJs_noAMD_plainScript_min.html"]
         options: run: true
-
       UMD: src: ["#{buildSpecDir}/SpecRunner_unoptimized_UMD.html"]
 
     concat:
@@ -124,7 +133,6 @@ module.exports = gruntFunction = (grunt) ->
   grunt.registerTask shortCut, splitTasks tasks for shortCut, tasks of {
     default:   "clean build test min testMin mocha run"
     build:     "urequire:UMD"
-
     test:      "urequire:spec mochaCmd"
     testMin:   "urequire:specCombined concat:specCombinedFakeModuleMin mochaCmdDev"
   }

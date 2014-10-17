@@ -5,5 +5,7 @@ module.exports = (greeting = "Mars...! Its seems no args were passed.")->
   doctype 'html'
   html ->
     body ->
-      div '#Hello, ',-> greeting
-      persons ['John', 'Mary']
+      div '#Hello,',-> greeting
+      persons ['Leonardo', 'Da Vinci']
+
+

@@ -1,25 +1,21 @@
 {
-  "name": "uberscore",
-  "version": "0.0.17alpha",
+  "name": "urequire-example",
+  "version": "0.0.5",
   "main": ["build/uberscore-dev.js", "build/uberscore-min.js"],
   "ignore": [
     "source",
     "Gruntfile.coffee",
     "node_modules",
     "bower_components",
-    "source/spec/*.*",
-    "source/examples/*.*",
-    "build/UMDplainReplaceDep",
-    "build/nodejsCompileAndCopy",
-    "build/spec_combined",
-    "build/spec",
-    "build/UMDunderscore",
+    "source/spec/**/*",
+    "source/examples/**/*",
     ".gitignore",
     ".npmignore",
     "travis.yml"
   ],
   "dependencies": {
-    "lodash": "*"
+    "lodash": "*",
+    "teacup": "*"
   },
   "devDependencies": {
     "chai": "*",
