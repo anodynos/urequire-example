@@ -14,8 +14,7 @@
     "travis.yml"
   ],
   "dependencies": {
-    "lodash": "*",
-    "teacup": "*"
+    "lodash": "*"
   },
   "devDependencies": {
     "chai": "*",
