@@ -33,26 +33,27 @@
     "node": ">=0.10"
   },
   "dependencies": {
-    "lodash": "*"
+    "lodash": "*",
+    "teacup": "*"
   },
   "devDependencies": {
     "chai": "*",
     "mocha": "*",
-    "coffee-script": "*",
-    "teacup": "*",
+    "coffee-script": "1.x.x",
     "grunt": "0.4.x",
-    "grunt-urequire": "*",
     "grunt-contrib-clean": "0.4.x",
     "grunt-contrib-concat": "0.1.x",
-    "grunt-shell": "~0.3.x",
     "grunt-contrib-watch": "0.5.x",
     "grunt-mocha": "*",
-    "uberscore": "0.0.16",
-    "urequire": "0.7.0-beta4",
+    "grunt-shell": "~0.3.x",
+    "grunt-urequire": "*",
+    "uberscore": "0.0.17",
+    "urequire": "^0.7.0-beta5",
     "urequire-rc-inject-version": "0.1.x",
     "urequire-rc-import": "0.1.x",
     "urequire-rc-less": "0.1.x",
     "urequire-rc-teacup-js": "0.2.x",
-    "urequire-rc-teacup-js2html": "0.2.x"
+    "urequire-rc-teacup-js2html": "0.2.x",
+    "urequire-grunt-spec-runner": "0.1.x"
   }
 }

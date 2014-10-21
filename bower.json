@@ -1,7 +1,7 @@
 {
   "name": "urequire-example",
   "version": "0.0.5",
-  "main": ["build/uberscore-dev.js", "build/uberscore-min.js"],
+  "main": ["build/minified/urequire-example-min.js"],
   "ignore": [
     "source",
     "Gruntfile.coffee",
@@ -21,6 +21,6 @@
     "mocha": "*",
     "requirejs": "*",
     "underscore": "*",
-    "uberscore": "*"
+    "uberscore": "0.0.17"
   }
 }

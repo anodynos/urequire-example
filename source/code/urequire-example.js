@@ -15,6 +15,9 @@ define(['./models/Person'], function (Person) {
     person.age = calc.multiply(person.age, 2);
 
     var homeTemplate = require('markup/home');
+
+    if (__isNode) {require('util')}
+
     return _.clone({ // _ is injected by uRequire in the whole bundle
         person: person,
         add: add,

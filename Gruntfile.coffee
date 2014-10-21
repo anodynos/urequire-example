@@ -4,6 +4,11 @@ S = if process.platform is 'win32' then '\\' else '/'
 nodeBin       = "node_modules#{S}.bin#{S}"
 _ = require 'lodash'
 
+#require 'coffee-script/register' # make sure the latest cofffe-script is used instead of grunt's
+
+urequireGruntSpecRunner = require 'urequire-grunt-spec-runner'
+lastLibBB = null # store the bundleBuilder of the last library build (source/code)
+
 sourceDir     = "source/code"
 buildDir      = "build"
 sourceSpecDir = "source/spec"
@@ -11,6 +16,7 @@ buildSpecDir  = "build/spec"
 
 module.exports = gruntFunction = (grunt) ->
   pkg = grunt.file.readJSON('package.json')
+  grunt.loadNpmTasks task for task of pkg.devDependencies when startsWith(task, 'grunt-')
 
   gruntConfig =
     urequire:
@@ -23,8 +29,10 @@ module.exports = gruntFunction = (grunt) ->
             ['teacup-js', tags: 'html, doctype, body, div, ul, li']
           ]
           main: "urequire-example"
-          dependencies: exports: bundle:
-            lodash: ['_']
+          dependencies:
+            imports:
+              lodash: ['_']
+            bower: true
 
         build:
           verbose: false
@@ -39,6 +47,8 @@ module.exports = gruntFunction = (grunt) ->
               * Copyright(c) #{ grunt.template.today("yyyy") } #{ pkg.author.name } (#{ pkg.author.email } )
               * Licensed #{ pkg.licenses[0].type } #{ pkg.licenses[0].url }
               */\n"""
+          
+          afterBuild :(err, bb)-> lastLibBB = if err then null else bb
 
       UMD:
         template: 'UMDplain'
@@ -68,18 +78,24 @@ module.exports = gruntFunction = (grunt) ->
         rjs: preserveLicenseComments: false
 
       spec:
-#        debugLevel: 100
+#        debugLevel: 30
         derive: []
         path: "#{sourceSpecDir}"
         copy: [/./]
         dstPath: "#{buildSpecDir}"
 
-        dependencies: exports: bundle:
-          chai: 'chai'
-          lodash: ['_']
-          'uberscore': '_B'
-          'urequire-example': ['uEx']
-          'helpers/specHelpers': 'spH'
+        dependencies:
+          imports:
+            chai: 'chai'
+            lodash: ['_']
+            uberscore: '_B'
+            'urequire-example': ['uEx']
+            'helpers/specHelpers': 'spH'
+
+          paths:
+            teacup: ["node_modules/teacup/lib/teacup"] # missing from bower
+
+          bower: true
 
         resources: [
           [ '+inject-_B.logger', ['**/*.js'], (m)-> m.beforeBody = "var l = new _B.Logger('#{m.dstFilename}');"]
@@ -91,10 +107,22 @@ module.exports = gruntFunction = (grunt) ->
           ]
         ]
 
-      specCombined:
+        afterBuild: (err, specBB)->
+          if not err
+            urequireGruntSpecRunner(lastLibBB, specBB, grunt,
+              setupCode: """
+                // test `noConflict()`: create two globals that 'll be 'hijacked' by rootExports
+                window.urequireExample = 'Old global `urequireExample`';
+                window.uEx = 'Old global `uEx`';
+              """
+            )
+
+      specMin:
         derive: ['spec']
         dstPath: "#{buildSpecDir}_combined/index-combined.js"
-        template: name: 'combined'
+        template:
+          name: 'combined'
+          moduleName: "index-combined"
 
     watch:
       options: spawn: false
@@ -103,7 +131,7 @@ module.exports = gruntFunction = (grunt) ->
         tasks: ['urequire:UMD' , 'urequire:spec', 'mochaCmd'] #'mocha:UMD']
       min:
         files: ["#{sourceDir}/**/*", "#{sourceSpecDir}/**/*"]
-        tasks: ['urequire:min', 'urequire:specCombined', 'concat:specCombinedFakeModuleMin', 'mochaCmdDev', 'mocha:plainScript']
+        tasks: ['urequire:min', 'urequire:specMin', 'concat:specCombinedFakeModuleMin', 'mochaCmdDev', 'mocha:min']
 
     shell:
       mochaCmd: command: "#{nodeBin}mocha #{buildSpecDir}/index --recursive --reporter spec"
@@ -111,11 +139,19 @@ module.exports = gruntFunction = (grunt) ->
       run: command: "#{nodeBin}coffee source/examples/runExample.coffee"
       options: {verbose: true, failOnError: true, stdout: true, stderr: true}
 
+
     mocha:
-      plainScript:
-        src: ["#{buildSpecDir}/SpecRunner_almondJs_noAMD_plainScript_min.html"]
+      min:
+        src: ["#{buildSpecDir}_combined/SpecRunner_almondJs_noAMD_plainScript_min.html"]
         options: run: true
+
+      mingen:
+        src: ["#{buildSpecDir}_combined/SpecRunner_Generated.html"]
+        options: run: true
+
       UMD: src: ["#{buildSpecDir}/SpecRunner_unoptimized_UMD.html"]
+
+      UMDgen: src: ["#{buildSpecDir}/SpecRunner_Generated.html"]
 
     concat:
       specCombinedFakeModuleMin:
@@ -134,8 +170,7 @@ module.exports = gruntFunction = (grunt) ->
     default:   "clean build test min testMin mocha run"
     build:     "urequire:UMD"
     test:      "urequire:spec mochaCmd"
-    testMin:   "urequire:specCombined concat:specCombinedFakeModuleMin mochaCmdDev"
+    testMin:   "urequire:specMin concat:specCombinedFakeModuleMin mochaCmdDev"
   }
 
-  grunt.loadNpmTasks task for task of pkg.devDependencies when startsWith(task, 'grunt-')
   grunt.initConfig gruntConfig
