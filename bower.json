@@ -1,7 +1,9 @@
 {
   "name": "urequire-example",
   "version": "0.0.5",
-  "main": ["build/minified/urequire-example-min.js"],
+  "main": [
+    "build/minified/urequire-example-min.js"
+  ],
   "ignore": [
     "source",
     "Gruntfile.coffee",
@@ -14,13 +16,14 @@
     "travis.yml"
   ],
   "dependencies": {
-    "lodash": "*"
+    "lodash": "*",
+    "teacup": "*"
   },
   "devDependencies": {
     "chai": "*",
     "mocha": "*",
     "requirejs": "*",
     "underscore": "*",
-    "uberscore": "0.0.17"
+    "uberscore": "0.0.16"
   }
 }

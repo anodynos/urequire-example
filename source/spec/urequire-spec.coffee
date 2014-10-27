@@ -1,32 +1,27 @@
-# All imports can be automatically injected via urequire-rc-import
-# See 'specHelpers' imports injected by uRequire:spec task
-
 uExLocal = require 'urequire-example'
 
 describe "uRequire:", ->
 
   describe """
-    `rootExports` & `noConflict():` # (running on #{
-      if __isNode then 'nodejs' else 'Web'} via #{if __isAMD then 'AMD' else 'noAMD/script'}):
+    uRequire's `rootExports` & `noConflict():` (running on #{
+      if __isNode then 'nodejs' else 'Web'} & loading via #{ if __isAMD then 'AMD' else 'noAMD/script' }):
     """, ->
+      # `window.urequireExample` set on HTML
+      urequireExample = require 'urequire-example'
 
-      it "registers globals 'urequireExample' & 'uEx'", ->
-        eq window.urequireExample, uExLocal
-        eq window.uEx, uExLocal
+      it "registers globals - RUNS only `if __isWeb and !__isAMD` ", ->
+        if __isWeb and !__isAMD
+          eq window.urequireExample, uExLocal
 
-      # `window.urequireExample` & `window.uEx` must be set on browser
-      # BEFORE loading 'urequire-example' (in SpecRunner_XXX.html)
-      it "noConflict() returns module & sets old values to globals 'urequireExample', 'uEx'", ->
-        eq window.uEx.noConflict(), uExLocal
-
-        if (__isWeb? and __isWeb) # work only on browser
+      it "Doesn't register globals & noConflict on AMD (RUNS only `if __isAMD and !__isNode`) ", ->
+        if __isAMD and !__isNode
           eq window.urequireExample, "Old global `urequireExample`"
-          eq window.uEx, "Old global `uEx`"
 
-  describe "'import' RC imports module keys as local vars:", ->
-    it "`_.isFunction` imported", ->
-      tru isFunction ->
-      eq isFunction, _.isFunction
+      it  "`noConflict()` returns module & sets old values (NOT only `if __isAMD and !__isNode`)", ->
+        if !__isAMD and !__isNode
+          eq window.urequireExample.noConflict(), uExLocal
+          eq window.urequireExample, "Old global `urequireExample`"
 
+  describe "'import-keys' ResourceConverter imports keys as local vars:", ->
     it "`chai.expect` imported", ->
-      expect(expect).to.be.a('Function')
+      expect(expect).to.be.a('Function') # ;-)

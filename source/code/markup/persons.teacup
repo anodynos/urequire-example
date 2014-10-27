@@ -1,4 +1,0 @@
-# No need to import any teacup keys as vars, eg `div = teacup.div` etc - they are automagically imported by urequire-rc-teacup-js
-module.exports = (names)->
-  ul ->
-    li name for name in names

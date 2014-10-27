@@ -23,8 +23,14 @@ describe " 'urequire-example' has:", ->
   it "person.eat food", ->
     eq uExLocal.person.eat('food'), 'ate food'
 
-  it "has some VERSION", ->
-    fals _.isEmpty uExLocal.VERSION
+  it "VERSION `#{uExLocal.VERSION}`, #{
+      if __isNode
+        "running on node, is the exact `package.version`."
+      else
+        "NOT running on node, it just exists."
+  }", ->
+    if __isNode
+      eq uExLocal.VERSION, JSON.parse(require('fs').readFileSync process.cwd() + '/package.json').version
+    else
+      ok uExLocal.VERSION
 
-  it "has the correct homeHTML", ->
-    eq uExLocal.homeHTML, '<html><body><div id="Hello,">Universe!</div><ul><li>Leonardo</li><li>Da Vinci</li></ul></body></html>'
