@@ -44,6 +44,6 @@
     "urequire": "^0.7.0-beta6",
     "urequire-rc-inject-version": "^0.1.2",
     "urequire-rc-import-keys": "0.1.x",
-    "urequire-ab-specrunner": "~0.1.1"
+    "urequire-ab-specrunner": "^0.1.4"
   }
 }
