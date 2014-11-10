@@ -7,4 +7,6 @@ before_script:
   - npm install -g bower
   - npm install -g mocha
   - npm install -g mocha-phantomjs
+  - mocha-phantomjs -V
+  - mocha-phantomjs
   - bower install
