@@ -40,6 +40,7 @@ module.exports = gruntFunction = (grunt) ->
         afterBuild: require('urequire-ab-specrunner').options
           injectCode: 'window.urequireExample = "Old global `urequireExample`";'
           debugLevel: 100
+          exec: true # for travis's sake, spawn 'mocha-phantomjs' fails
 
       specMin:
         derive: 'spec'
