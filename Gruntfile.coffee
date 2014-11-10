@@ -39,6 +39,7 @@ module.exports = gruntFunction = (grunt) ->
             'chai': ['expect'] ] ]
         afterBuild: require('urequire-ab-specrunner').options
           injectCode: 'window.urequireExample = "Old global `urequireExample`";'
+          debugLevel: 100
 
       specMin:
         derive: 'spec'

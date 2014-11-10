@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/anodynos/urequire-example.png)](https://travis-ci.org/anodynos/urequire-example)
 [![Up to date Status](https://david-dm.org/anodynos/urequire-example.png)](https://david-dm.org/anodynos/urequire-example.png)
 
-An example project using [urequire](http://urequire.org), [grunt-urequire](https://github.com/aearly/grunt-urequire) & [urequire-ab-specrunner](https://github.com/aearly/grunt-urequire).
+An example project using [urequire](http://urequire.org), [grunt-urequire](https://github.com/aearly/grunt-urequire) & [urequire-ab-specrunner](https://github.com/anodynos/urequire-ab-specrunner).
 
 Provides boilerplate & grunt/urequire config for cross module systems development and cross runtimes deployment.
 
