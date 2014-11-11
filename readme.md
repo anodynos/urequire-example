@@ -27,7 +27,7 @@ You should already have installed and working
 
 ```
 
-Then clone and install dependencies for both nodejs & browser through bower:
+Then clone and install dependencies for both nodejs (npm) & browser (bower):
 
 ```bash
 

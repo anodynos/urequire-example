@@ -10,8 +10,7 @@ module.exports = gruntFunction = (grunt) ->
       UMD:
         path: "source/code"
         resources: [ 'inject-version' ]
-        dependencies:
-          node: ['nodeOnly/*']
+        dependencies: node: ['nodeOnly/*']
         dstPath: "build/UMD"
         template: 'UMDplain'
 
@@ -35,8 +34,8 @@ module.exports = gruntFunction = (grunt) ->
           uberscore: { deps: ['lodash'], exports: '_B'}
         resources: [
           ['import-keys',
-            'specHelpers': [ 'tru', ['equal', 'eq'], 'fals', 'ok' ]
-            'chai': ['expect'] ] ]
+             'specHelpers': [ 'tru', ['equal', 'eq'], 'fals', 'ok' ]
+             'chai': ['expect'] ] ]
         afterBuild: require('urequire-ab-specrunner').options
           injectCode: 'window.urequireExample = "Old global `urequireExample`";'
 
