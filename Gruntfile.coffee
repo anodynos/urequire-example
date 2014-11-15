@@ -4,7 +4,7 @@ module.exports = gruntFunction = (grunt) ->
       _all:
         dependencies:
           paths: bower: true
-          imports: {lodash: ['_']}
+          imports: lodash: ['_']
         template: banner: true
 
       UMD:
@@ -29,8 +29,6 @@ module.exports = gruntFunction = (grunt) ->
           uberscore: '_B'
           'urequire-example': ['uEx']
           'specHelpers': 'spH'
-        rjs: shim:
-          uberscore: { deps: ['lodash'], exports: '_B'}
         resources: [
           ['import-keys',
              'specHelpers': [ 'tru', ['equal', 'eq'], 'fals', 'ok' ]
@@ -50,7 +48,7 @@ module.exports = gruntFunction = (grunt) ->
   grunt.registerTask shortCut, "urequire:#{shortCut}" for shortCut of gruntConfig.urequire
   grunt.registerTask shortCut, splitTasks tasks for shortCut, tasks of {
     default: "UMD spec min specDev"
-    develop: "UMD specWatch"
+    develop: "min specWatch"
     all: "UMD spec UMD specDev min spec min specDev"
   }
   grunt.loadNpmTasks task for task of grunt.file.readJSON('package.json').devDependencies when task.lastIndexOf('grunt-', 0) is 0

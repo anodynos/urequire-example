@@ -5,4 +5,4 @@
 /DRAFT
 /.npmignore
 /.gitignore
-bower-paths-local-cache.json
+.urequire-local-deps-cache.json

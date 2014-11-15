@@ -3,4 +3,4 @@
 /bower_components/
 /DRAFT/*.*
 /build
-urequire-local-paths-cache.json
+.urequire-local-deps-cache.json
