@@ -1,7 +1,7 @@
 {
   "name": "urequire-example",
   "description": "Example project build with uRequire.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/anodynos/urequire-example",
   "author": {
     "name": "Agelos Pikoulas",
@@ -41,9 +41,9 @@
     "grunt-contrib-watch": "0.5.x",
     "grunt-urequire": "0.7.x",
     "uberscore": "0.0.17",
-    "urequire": "^0.7.0-beta8",
+    "urequire": "^0.7.0-beta10",
     "urequire-rc-inject-version": "^0.1.2",
     "urequire-rc-import-keys": "0.1.x",
-    "urequire-ab-specrunner": "^0.1.4"
+    "urequire-ab-specrunner": "^0.1.9"
   }
 }

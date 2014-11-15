@@ -22,7 +22,6 @@ module.exports = gruntFunction = (grunt) ->
         rjs: preserveLicenseComments: false
 
       spec:
-        derive: []
         path: "source/spec"
         dstPath: "build/spec"
         dependencies: imports:
@@ -39,19 +38,20 @@ module.exports = gruntFunction = (grunt) ->
         afterBuild: require('urequire-ab-specrunner').options
           injectCode: 'window.urequireExample = "Old global `urequireExample`";'
 
-      specMin:
+      specDev:
         derive: 'spec'
         dstPath: "build/spec_combined/index-combined.js"
         template: name: 'combined'
 
-      specWatch: derive: 'specMin', watch: true
+      specWatch: derive: 'specDev', watch: true
 
   _ = require 'lodash'
   splitTasks = (tasks)-> if _.isArray tasks then tasks else _.filter tasks.split /\s/
   grunt.registerTask shortCut, "urequire:#{shortCut}" for shortCut of gruntConfig.urequire
   grunt.registerTask shortCut, splitTasks tasks for shortCut, tasks of {
-    default: "UMD spec min specMin"
-    all: "UMD spec UMD specMin min spec min specMin"
+    default: "UMD spec min specDev"
+    develop: "UMD specWatch"
+    all: "UMD spec UMD specDev min spec min specDev"
   }
   grunt.loadNpmTasks task for task of grunt.file.readJSON('package.json').devDependencies when task.lastIndexOf('grunt-', 0) is 0
   grunt.initConfig gruntConfig
