@@ -32,7 +32,7 @@ module.exports = gruntFunction = (grunt) ->
         resources: [
           ['import-keys',
              'specHelpers': [ 'tru', ['equal', 'eq'], 'fals', 'ok' ]
-             'chai': ['expect'] ] ]
+             'chai': 'expect' ] ]
         afterBuild: require('urequire-ab-specrunner').options
           injectCode: 'window.urequireExample = "Old global `urequireExample`";'
 
