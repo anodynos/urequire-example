@@ -5,14 +5,16 @@ module.exports = gruntFunction = (grunt) ->
         dependencies:
           paths: bower: true
           imports: lodash: ['_']
-        template: banner: true
+        clean: true
 
       UMD:
         path: "source/code"
         resources: [ 'inject-version' ]
         dependencies: node: ['nodeOnly/*']
         dstPath: "build/UMD"
-        template: 'UMDplain'
+        template:
+          name: 'UMDplain'
+          banner: true
 
       min:
         derive: 'UMD'

@@ -3,9 +3,11 @@
 [![Build Status](https://travis-ci.org/anodynos/urequire-example.png)](https://travis-ci.org/anodynos/urequire-example)
 [![Up to date Status](https://david-dm.org/anodynos/urequire-example.png)](https://david-dm.org/anodynos/urequire-example.png)
 
+## Introduction
+
 An example project using [urequire](http://urequire.org), [grunt-urequire](https://github.com/aearly/grunt-urequire) & [urequire-ab-specrunner](https://github.com/anodynos/urequire-ab-specrunner).
 
-Provides boilerplate & grunt/urequire config for cross module systems development and cross runtimes deployment.
+Provides an example of grunt/urequire config for cross module systems development and cross runtimes deployment.
 
 It comes with automagically generated tests that run on nodejs & phantomjs (browser) both as Web/AMD & Web/Script.
 

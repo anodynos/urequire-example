@@ -1,36 +1,36 @@
-# All imports can be automatically injected via urequire-rc-import
-# See 'specHelpers' imports injected by uRequire:spec task
+# All specHelper imports are injected via `urequire-rc-import`
+# See 'specHelpers' imports in uRequire:spec task
 
-uExLocal = require 'urequire-example'
+# `uEx` var injected by `dependencies: imports`
 
 describe " 'urequire-example' has:", ->
 
   it "person.fullName()", ->
-    eq uExLocal.person.fullName(), 'John Doe'
+    eq uEx.person.fullName(), 'John Doe'
 
   it "person.age", ->
-    eq uExLocal.person.age, 40
+    eq uEx.person.age, 40
 
   it "add function", ->
-    tru _.isFunction uExLocal.add
-    eq uExLocal.add(20, 18), 38
-    eq uExLocal.calc.add(20, 8), 28
+    tru _.isFunction uEx.add
+    eq uEx.add(20, 18), 38
+    eq uEx.calc.add(20, 8), 28
 
   it "calc.multiply", ->
-    tru _.isFunction uExLocal.calc.multiply
-    eq uExLocal.calc.multiply(18, 2), 36
+    tru _.isFunction uEx.calc.multiply
+    eq uEx.calc.multiply(18, 2), 36
 
   it "person.eat food", ->
-    eq uExLocal.person.eat('food'), 'ate food'
+    eq uEx.person.eat('food'), 'ate food'
 
-  it "VERSION `#{uExLocal.VERSION}`, #{
+  it "VERSION `#{uEx.VERSION}`, #{
       if __isNode
         "running on node, is the exact `package.version`."
       else
         "NOT running on node, it just exists."
   }", ->
     if __isNode
-      eq uExLocal.VERSION, JSON.parse(require('fs').readFileSync process.cwd() + '/package.json').version
+      eq uEx.VERSION, JSON.parse(require('fs').readFileSync process.cwd() + '/package.json').version
     else
-      ok uExLocal.VERSION
+      ok uEx.VERSION
 
