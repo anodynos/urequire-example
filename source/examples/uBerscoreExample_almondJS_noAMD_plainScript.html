@@ -33,18 +33,13 @@
 
   <!--Now lets run some examples/tests!-->
   <script>
-    console.log("...LOADED urequire-example via script tag!", uEx);
-
-    console.log("uEx global var", uEx.person);
-    console.log("urequireExample global var", urequireExample.person);
+    console.log("...LOADED urequire-example via script tag!", urequireExample);
 
     console.log("Checking noConflict(), reclaim globals `urequireExample` & `uEx`.");
-    console.log("Current uEx:", uEx);
     console.log("Current urequireExample:", urequireExample);
 
-    var localmylib = uEx.noConflict();
+    var localmylib = urequireExample.noConflict();
     console.log("noConflict() was called - new values:");
-    console.log("Old global `uEx` is '", uEx);
     console.log("Old global `urequireExample` is '", urequireExample);
     console.log("localmylib still works", localmylib.person);
   </script>
