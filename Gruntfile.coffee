@@ -20,7 +20,10 @@ module.exports = gruntFunction = (grunt) ->
         derive: 'UMD'
         dstPath: "build/minified/urequire-example-min.js"
         template: name: 'combined'
-        optimize: true
+        optimize: uglify2:
+          output: beautify: true
+          compress: false
+          mangle: false
         rjs: preserveLicenseComments: false
 
       spec:
@@ -45,8 +48,7 @@ module.exports = gruntFunction = (grunt) ->
 
       specWatch: derive: 'specDev', watch: true
 
-  _ = require 'lodash'
-  splitTasks = (tasks)-> if _.isArray tasks then tasks else _.filter tasks.split /\s/
+  splitTasks = (tasks)-> if (tasks instanceof Array) then tasks else tasks.split(/\s/).filter((f)->!!f)
   grunt.registerTask shortCut, "urequire:#{shortCut}" for shortCut of gruntConfig.urequire
   grunt.registerTask shortCut, splitTasks tasks for shortCut, tasks of {
     default: "UMD spec min specDev"
