@@ -9,9 +9,7 @@ An example project build with [urequire](http://urequire.org), [grunt-urequire](
 
 *For a simpler *hello world* example see [urequire-example-helloworld](http://github.com/anodynos/urequire-example-helloworld)*
 
-The DRY & declarative urequire config in `Gruntfile.coffee` allows cross module systems development, cross runtimes deployment & testing .
-
-Just with 50 lines of config, it shows off the automagical :
+With just 30 lines of DRY & declarative uRequire config, this example shows off the automagical :
 
 * transparent compilation from **coffee-script**, **coco**, **LiveScript** etc to **javascript**.
 
@@ -38,6 +36,8 @@ Just with 50 lines of config, it shows off the automagical :
 * deriving (i.e like *inheritance* in OO) of configs.
 
 * passing r.js options
+
+* a cross *module systems development*, *cross runtimes deployment* & automagical continuous testing.
 
 * and *last but not least*: The *elimination* of (the need for) **grunt plugins**. There's isnt any hint of `grunt-xxx` for `watch`, `coffee-script`, `browserify`, `uglify`, `mocha`, `concat`, `phantomjs`, `banner`, `clean` etc). This is great news cause cause **grunt plugins have many disadvantages** :
 
