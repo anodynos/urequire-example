@@ -7,9 +7,9 @@
 
 An example project build with [urequire](http://urequire.org), [grunt-urequire](https://github.com/aearly/grunt-urequire) & [urequire-ab-specrunner](https://github.com/anodynos/urequire-ab-specrunner).
 
-*For a simpler *hello world* example see [urequire-example-helloworld](http://github.com/anodynos/urequire-example-helloworld)*
+*For a simpler example see [urequire-example-helloworld](http://github.com/anodynos/urequire-example-helloworld)*
 
-With just 50 lines of DRY & declarative uRequire config, this example shows off the automagical :
+With just ~50 lines of DRY & declarative uRequire config, this example shows off the **automagical** :
 
 * transparent compilation from **coffee-script**, **coco**, **LiveScript** etc to **javascript**.
 
@@ -39,7 +39,7 @@ With just 50 lines of DRY & declarative uRequire config, this example shows off 
 
 * a cross *module systems development*, *cross runtimes deployment* & automagical continuous testing.
 
-* and *last but not least*: The *elimination* of (the need for) **grunt plugins**. There's isnt any hint of `grunt-xxx` for `watch`, `coffee-script`, `browserify`, `uglify`, `mocha`, `concat`, `phantomjs`, `banner`, `clean` etc). This is great news cause cause **grunt plugins have many disadvantages** :
+* and *last but not least*: The *elimination* of (the need for) **grunt plugins**. There's isnt any hint of `grunt-xxx` for `watch`, `coffee-script`, `browserify`, `uglify`, `mocha`, `concat`, `phantomjs`, `banner`, `clean` etc). This is great news cause **grunt plugins have many disadvantages** :
 
      * repeating the same source & dest paths & files all over again (when you should keep it DRY)
 
@@ -135,7 +135,7 @@ For more advanced uRequire config examples with comments etc see :
 
 * Check out the [urequire-ab-specrunner](https://github.com/anodynos/urequire-ab-specrunner) docs.
 
-Finally, write your own ResourceConverter or AfterBuilder :-)
+Finally, write your awesome `ResourceConverter` or `AfterBuilder` (and publish it as `urequire-rc-awesome` or `urequire-ab-awesome` :-)
 
 # License
 
