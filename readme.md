@@ -9,7 +9,7 @@ An example project build with [urequire](http://urequire.org), [grunt-urequire](
 
 *For a simpler *hello world* example see [urequire-example-helloworld](http://github.com/anodynos/urequire-example-helloworld)*
 
-With just 30 lines of DRY & declarative uRequire config, this example shows off the automagical :
+With just 50 lines of DRY & declarative uRequire config, this example shows off the automagical :
 
 * transparent compilation from **coffee-script**, **coco**, **LiveScript** etc to **javascript**.
 
