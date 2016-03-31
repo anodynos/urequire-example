@@ -9,7 +9,11 @@ module.exports = gruntFunction = (grunt) ->
 
       UMD:
         path: "source/code"
-        resources: [ 'inject-version' ]
+        resources: [
+          'inject-version'
+          [ '+single-quotes', ['**/*.js'],
+            (m)-> m.codegenOptions = format: quotes: 'single'] # change escodegen options
+        ]
         dependencies: node: ['nodeOnly/*']
         dstPath: "build/UMD"
         template:

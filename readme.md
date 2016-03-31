@@ -47,9 +47,9 @@ With just ~50 lines of DRY & declarative uRequire config, this example shows off
 
      * making sure they run in the right order & hope they produce the right result
 
-     * producing many intermediate temp files
+     * producing many intermediate temp files (slow on i/o)
 
-     * building everything with each change etc
+     * usually building everything with each change
 
      * writing stuff for things that should be automagical ;-)
 
