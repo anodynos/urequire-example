@@ -16,12 +16,12 @@
     "travis.yml"
   ],
   "dependencies": {
-    "lodash": "*"
+    "lodash": "3.x"
   },
   "devDependencies": {
-    "chai": "*",
-    "mocha": "*",
-    "requirejs": "*",
+    "chai": "3.5.x",
+    "mocha": "2.4.x",
+    "requirejs": "2.1.x",
     "uberscore": "0.0.16"
   }
 }
